@@ -1,0 +1,6 @@
+net/octae/ucleague/business/service/CategoryService.class
+net/octae/ucleague/business/service/TaskService.class
+net/octae/ucleague/configuration/BusinessConfig.class
+net/octae/ucleague/business/service/impl/TaskServiceImpl.class
+net/octae/ucleague/business/service/impl/CategoryServiceImpl.class
+net/octae/ucleague/business/service/util/EntityConverter.class

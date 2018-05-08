@@ -1,0 +1,6 @@
+/home/jorge/devel/git/tudu-backend/ucleague-backend-ws/src/main/java/net/octae/ucleague/ws/controller/TaskController.java
+/home/jorge/devel/git/tudu-backend/ucleague-backend-ws/src/main/java/net/octae/ucleague/ws/dto/TaskDTO.java
+/home/jorge/devel/git/tudu-backend/ucleague-backend-ws/src/main/java/net/octae/ucleague/ws/TuduBackendApplication.java
+/home/jorge/devel/git/tudu-backend/ucleague-backend-ws/src/main/java/net/octae/ucleague/ws/controller/CategoryController.java
+/home/jorge/devel/git/tudu-backend/ucleague-backend-ws/src/main/java/net/octae/ucleague/ws/dto/CategoryDTO.java
+/home/jorge/devel/git/tudu-backend/ucleague-backend-ws/src/main/java/net/octae/ucleague/ws/configuration/WebserviceConfiguration.java

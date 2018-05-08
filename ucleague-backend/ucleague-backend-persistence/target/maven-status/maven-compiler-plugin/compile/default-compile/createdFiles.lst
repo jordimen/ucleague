@@ -1,0 +1,5 @@
+net/octae/ucleague/persistence/repository/TaskRepository.class
+net/octae/ucleague/persistence/repository/CategoryRepository.class
+net/octae/ucleague/persistence/entity/CategoryEntity.class
+net/octae/ucleague/persistence/configuration/PersistenceConfiguration.class
+net/octae/ucleague/persistence/entity/TaskEntity.class

@@ -1,0 +1,3 @@
+server.servlet.context-path: /
+
+spring.h2.console.enabled: true

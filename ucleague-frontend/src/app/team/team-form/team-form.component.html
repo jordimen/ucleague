@@ -1,0 +1,56 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <mat-card>
+    <mat-card-header>
+      <h1>Team</h1>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div>
+        <mat-form-field class="input-100">
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+          <div *ngIf="name.errors.required">
+            Name is required.
+          </div>
+          <div *ngIf="name.errors.minlength">
+            Name must be at least 4 characters long.
+          </div>
+          <div *ngIf="name.errors.maxlength">
+            Name must be less than 24 characters long.
+          </div>
+        </div>
+      </div>
+
+      <app-country-selector [country]="team?.country"></app-country-selector>
+
+      <div>
+        <mat-form-field class="input-100">
+          <mat-select formControlName="rival" placeholder="Rival team">
+            <mat-option value="option">Option 1</mat-option>
+            <mat-option value="option">Option 2</mat-option>
+            <mat-option value="option">Option 3</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button mat-raised-button>
+          Select File to Upload
+        </button>
+        <input id="fileInput" class="hide-it" type="file" (change)="fileChange($event.target.files)">
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <mat-divider></mat-divider>
+      <div class="button-row" style="padding-top:10px;">
+        <button mat-raised-button routerLink="/teams">Cancel</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Accept</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+
+</form>
