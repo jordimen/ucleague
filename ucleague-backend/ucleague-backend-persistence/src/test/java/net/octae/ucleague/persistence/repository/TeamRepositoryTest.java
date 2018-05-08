@@ -34,7 +34,7 @@ public class TeamRepositoryTest {
     public void findByCategoryIdInWithSuccess() {
 
         // Arrange
-        CountryEntity country1 = new CountryEntity("Country 1");
+        CountryEntity country1 = new CountryEntity("C1", "Country 1");
         entityManager.persist(country1);
         entityManager.flush();
 

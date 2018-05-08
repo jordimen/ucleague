@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.List;
 
+import org.hibernate.annotations.Formula;
+
 /**
  * The type Team entity.
  */
@@ -38,6 +40,10 @@ public class TeamEntity {
 
     @OneToMany(mappedBy = "winner", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChampionshipEntity> championships;
+
+    //TO IMPROVE: poor performance
+    @Formula("(select count(*) from CHAMPIONSHIP c where c.winner_id = id)")
+    private Integer totalChampionships;
 
     /**
      * Instantiates a new Team entity.
@@ -169,5 +175,23 @@ public class TeamEntity {
      */
     public void setChampionships(List<ChampionshipEntity> championships) {
         this.championships = championships;
+    }
+
+    /**
+     * Gets total championships.
+     *
+     * @return the total championships
+     */
+    public Integer getTotalChampionships() {
+        return totalChampionships;
+    }
+
+    /**
+     * Sets total championships.
+     *
+     * @param totalChampionships the total championships
+     */
+    public void setTotalChampionships(Integer totalChampionships) {
+        this.totalChampionships = totalChampionships;
     }
 }

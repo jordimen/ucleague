@@ -1,10 +1,9 @@
 package net.octae.ucleague.ws.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import java.util.List;
 
 /**
  * The type Team dto.
@@ -25,6 +24,8 @@ public class TeamDTO {
     private Long imageId;
 
     private List<ChampionshipDTO> championships;
+
+    private Integer totalChampionships;
 
     /**
      * Gets id.
@@ -132,5 +133,23 @@ public class TeamDTO {
      */
     public void setChampionships(List<ChampionshipDTO> championships) {
         this.championships = championships;
+    }
+
+    /**
+     * Gets total championships.
+     *
+     * @return the total championships
+     */
+    public Integer getTotalChampionships() {
+        return totalChampionships;
+    }
+
+    /**
+     * Sets total championships.
+     *
+     * @param totalChampionships the total championships
+     */
+    public void setTotalChampionships(Integer totalChampionships) {
+        this.totalChampionships = totalChampionships;
     }
 }

@@ -19,6 +19,8 @@ public class Team {
 
     private List<Championship> championships;
 
+    private Integer totalChampionships;
+
     /**
      * Instantiates a new Team.
      */
@@ -140,5 +142,23 @@ public class Team {
      */
     public void setChampionships(List<Championship> championships) {
         this.championships = championships;
+    }
+
+    /**
+     * Gets total championships.
+     *
+     * @return the total championships
+     */
+    public Integer getTotalChampionships() {
+        return totalChampionships;
+    }
+
+    /**
+     * Sets total championships.
+     *
+     * @param totalChampionships the total championships
+     */
+    public void setTotalChampionships(Integer totalChampionships) {
+        this.totalChampionships = totalChampionships;
     }
 }
