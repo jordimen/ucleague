@@ -7,9 +7,17 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The type Business config.
+ */
 @Configuration
 public class BusinessConfig {
 
+    /**
+     * Dozer bean dozer bean mapper.
+     *
+     * @return the dozer bean mapper
+     */
     @Bean(name = "org.dozer.Mapper")
     public DozerBeanMapper dozerBean() {
         List<String> mappingFiles = Arrays.asList(

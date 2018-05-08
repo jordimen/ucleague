@@ -7,6 +7,9 @@ import net.octae.ucleague.persistence.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Country service.
+ */
 @Service
 public class CountryServiceImpl implements CountryService {
 

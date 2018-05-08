@@ -4,6 +4,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+/**
+ * The type Persistence configuration.
+ */
 @Configuration
 @EntityScan(basePackages = "net.octae.ucleague.persistence.entity")
 @EnableJpaRepositories(basePackages = "net.octae.ucleague.persistence.repository")

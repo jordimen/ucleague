@@ -6,6 +6,9 @@ import net.octae.ucleague.persistence.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Image service.
+ */
 @Service
 public class ImageServiceImpl implements ImageService {
 

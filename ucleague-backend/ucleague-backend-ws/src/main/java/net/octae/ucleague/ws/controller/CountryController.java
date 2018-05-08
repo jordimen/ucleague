@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The type Country controller.
+ */
 @RestController
 @RequestMapping(path = "/country")
 public class CountryController {
@@ -18,6 +21,11 @@ public class CountryController {
     @Autowired
     private CountryService countryService;
 
+    /**
+     * Gets countries.
+     *
+     * @return the countries
+     */
     @GetMapping
     public Iterable<CountryDTO> getCountries() {
         return entityConverter.convert(countryService.getCountries(), CountryDTO.class);
