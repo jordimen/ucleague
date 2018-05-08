@@ -14,7 +14,7 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 @Injectable()
 export class TeamService {
 
-  private url = environment.apiUrl + '/team';
+  private url = `${environment.apiUrl}/team`;
 
   constructor(private http: HttpClient) { }
 
@@ -28,6 +28,16 @@ export class TeamService {
       return this.http.post<Team>(postUrl, teamInput).pipe(
         catchError(this.handleError<Team>(`newTeam ${teamInput}`)));
     }
+  }
+
+  getTeamsByName(name: string): Observable<PaginationPage<Team>> {
+    const params = new HttpParams()
+      .set('name', name)
+      .set('page', '0')
+      .set('size', `${Number.MAX_VALUE}`)
+      .set('sort', 'name,asc');
+    return this.http.get<PaginationPage<Team>>(this.url, { params }).pipe(
+      catchError(this.handleError<PaginationPage<Team>>('getTeams')));
   }
 
   getTeams(sort: string, order: string, page: number, size: number): Observable<PaginationPage<Team>> {

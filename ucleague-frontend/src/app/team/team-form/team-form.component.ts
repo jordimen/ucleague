@@ -8,14 +8,13 @@ import { CountrySelectorComponent } from '../../common-components/country-select
 import { Country } from '../../common-components/country-selector/country';
 
 @Component({
-  selector: 'app-team-form',
+  selector: 'ucleague-team-form',
   templateUrl: './team-form.component.html',
   styleUrls: ['./team-form.component.css']
 })
-export class TeamFormComponent implements OnInit, AfterViewInit {
+export class TeamFormComponent implements OnInit {
 
-  @ViewChild(CountrySelectorComponent) countrySelector: CountrySelectorComponent;
-  team: Team;
+  team: Team = new Team();
   form: FormGroup;
 
   constructor(private route: ActivatedRoute,
@@ -25,24 +24,25 @@ export class TeamFormComponent implements OnInit, AfterViewInit {
 
       this.form = fb.group({
         name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(24)]],
-        rival: [''],
         logo: ['']
       });
+
+      this.initializeTeam();
   }
 
   ngOnInit(): void {
-    this.initializeTeam();
-  }
-
-  ngAfterViewInit() {
   }
 
   get name() {
     return this.form.get('name');
   }
 
-  get country() {
-    return this.form.get('country');
+  countrySelected(country: Country) {
+    this.team.country = country;
+  }
+
+  rivalTeamSelected(team: Team) {
+    this.team.rival = team;
   }
 
   onSubmit() {
@@ -55,8 +55,8 @@ export class TeamFormComponent implements OnInit, AfterViewInit {
     const team: TeamInput = {
       id: this.team.id,
       name: formModel.name as string,
-      countryCode: this.countrySelector.getCountry().code,
-      rivalId: null
+      countryCode: this.team.country.code,
+      rivalId: this.team.rival.id
     };
     return team;
   }
@@ -67,10 +67,7 @@ export class TeamFormComponent implements OnInit, AfterViewInit {
       this.teamService.getTeam(id).subscribe(team => {
         this.form.patchValue(team);
         this.team = team;
-        this.countrySelector.setCountry(this.team.country);
       });
-    } else {
-      this.team = new Team();
     }
   }
 }

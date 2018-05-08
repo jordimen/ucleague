@@ -9,7 +9,7 @@ import { Country } from './country';
 @Injectable()
 export class CountryService {
 
-  private url = environment.apiUrl + '/country';
+  private url = `${environment.apiUrl}/country`;
 
   constructor(private http: HttpClient) { }
 

@@ -11,6 +11,7 @@ import { CommonComponentsModule } from '../common-components/common-components.m
 import { TeamListComponent } from './team-list/team-list.component';
 import { TeamService } from './team.service';
 import { TeamFormComponent } from './team-form/team-form.component';
+import { TeamSelectorComponent } from './component/team-selector/team-selector.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { TeamFormComponent } from './team-form/team-form.component';
   ],
   declarations: [
     TeamListComponent,
-    TeamFormComponent
+    TeamFormComponent,
+    TeamSelectorComponent
   ],
   providers: [
     TeamService

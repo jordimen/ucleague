@@ -24,17 +24,14 @@
         </div>
       </div>
 
-      <app-country-selector [country]="team?.country"></app-country-selector>
+      <ucleague-country-selector [(country)]="team.country"
+        (countrySelected)="countrySelected($event)">
+      </ucleague-country-selector>
 
-      <div>
-        <mat-form-field class="input-100">
-          <mat-select formControlName="rival" placeholder="Rival team">
-            <mat-option value="option">Option 1</mat-option>
-            <mat-option value="option">Option 2</mat-option>
-            <mat-option value="option">Option 3</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+      <ucleague-team-selector [placeholder]="'Rival team'" [(team)]="team.rival"
+        (teamSelected)="rivalTeamSelected($event)">
+
+      </ucleague-team-selector>
 
       <div>
         <button mat-raised-button>

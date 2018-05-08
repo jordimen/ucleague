@@ -13,7 +13,7 @@ import { PaginationPage } from '../pagination';
 import { TeamService } from '../team.service';
 
 @Component({
-  selector: 'app-teams',
+  selector: 'ucleague-teams',
   templateUrl: './team-list.component.html',
   styleUrls: ['./team-list.component.css']
 })

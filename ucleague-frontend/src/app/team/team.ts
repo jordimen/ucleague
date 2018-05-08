@@ -4,7 +4,7 @@ export class Team {
     id: number;
     name: string;
     country: Country;
-    rival: number;
+    rival: Team;
     logo: number;
 }
 

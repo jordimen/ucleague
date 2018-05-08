@@ -4,10 +4,10 @@ import net.octae.ucleague.business.service.TeamService;
 import net.octae.ucleague.business.service.util.EntityConverter;
 import net.octae.ucleague.domain.Country;
 import net.octae.ucleague.domain.Team;
+import net.octae.ucleague.domain.TeamInput;
 import net.octae.ucleague.ws.dto.ChampionshipDTO;
 import net.octae.ucleague.ws.dto.TeamDTO;
 import net.octae.ucleague.ws.dto.TeamInputDTO;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,23 +30,17 @@ public class TeamController {
     private TeamService teamService;
 
     /**
-     * Gets teams.
+     * Gets paged teams.
      *
      * @param name     the name
      * @param pageable the pageable
      * @return the teams
      */
     @GetMapping
-    public Page<TeamDTO> getTeams(@RequestParam(required = false) String name, Pageable pageable) {
+    public Page<TeamDTO> getPagedTeams(@RequestParam(required = false) String name, Pageable pageable) {
 
-        Page<Team> tasks;
-        if (StringUtils.isBlank(name)) {
-            tasks = teamService.getTeams(pageable);
-        } else {
-            tasks = teamService.getTeamsByName(name, pageable);
-        }
-
-        return entityConverter.convert(tasks, TeamDTO.class);
+        Page<Team> teams = teamService.getTeams(name, pageable);
+        return entityConverter.convert(teams, TeamDTO.class);
     }
 
     /**
@@ -69,15 +63,8 @@ public class TeamController {
     @PostMapping
     public TeamDTO createTeam(@Valid @RequestBody TeamInputDTO teamInputDTO) {
 
-        Team team = new Team();
-        team.setName(teamInputDTO.getName());
-        team.setCountry(new Country(teamInputDTO.getCountryCode()));
-        team.setImageId(teamInputDTO.getImageId());
-        if (teamInputDTO.getRivalId() != null) {
-            team.setRival(new Team(teamInputDTO.getRivalId()));
-        }
-
-        return entityConverter.convert(teamService.createOrUpdateTeam(team), TeamDTO.class);
+        TeamInput teamInput = entityConverter.convert(teamInputDTO,TeamInput.class);
+        return entityConverter.convert(teamService.createTeam(teamInput), TeamDTO.class);
     }
 
     /**
@@ -88,15 +75,8 @@ public class TeamController {
      */
     @PutMapping(path = "/{teamId}")
     public void updateTeam(@PathVariable Long teamId, @Valid @RequestBody TeamInputDTO teamInputDTO) {
-        Team team = new Team();
-        team.setId(teamId);
-        team.setName(teamInputDTO.getName());
-        team.setCountry(new Country(teamInputDTO.getCountryCode()));
-        team.setImageId(teamInputDTO.getImageId());
-        if (teamInputDTO.getRivalId() != null) {
-            team.setRival(new Team(teamInputDTO.getRivalId()));
-        }
-        teamService.createOrUpdateTeam(team);
+        TeamInput teamInput = entityConverter.convert(teamInputDTO,TeamInput.class);
+        teamService.updateTeam(teamId, teamInput);
     }
 
     /**

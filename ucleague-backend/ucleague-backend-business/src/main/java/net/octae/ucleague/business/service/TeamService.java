@@ -1,6 +1,7 @@
 package net.octae.ucleague.business.service;
 
 import net.octae.ucleague.domain.Team;
+import net.octae.ucleague.domain.TeamInput;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,27 +21,28 @@ public interface TeamService {
     /**
      * Gets teams.
      *
+     * @param name     the name
      * @param pageable the pageable
      * @return the teams
      */
-    Page<Team> getTeams(Pageable pageable);
+    Page<Team> getTeams(String name, Pageable pageable);
 
     /**
-     * Gets teams by name.
+     * Create or update team.
      *
-     * @param name     the name
-     * @param pageable the pageable
-     * @return the teams by name
-     */
-    Page<Team> getTeamsByName(String name, Pageable pageable);
-
-    /**
-     * Create or update team team.
-     *
-     * @param team the team
+     * @param teamInput the team input
      * @return the team
      */
-    Team createOrUpdateTeam(Team team);
+    Team createTeam(TeamInput teamInput);
+
+    /**
+     * Update a team.
+     *
+     * @param teamId the team identifier
+     * @param teamInput the team data
+     * @return
+     */
+    Team updateTeam(Long teamId, TeamInput teamInput);
 
     /**
      * Delete team.

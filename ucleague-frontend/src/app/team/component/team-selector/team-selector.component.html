@@ -1,0 +1,11 @@
+<mat-form-field class="input-100">
+  <input matInput aria-label="Team" placeholder="{{placeholder}}"
+    [formControl]="teamSelectorCtrl" [matAutocomplete]="auto">
+
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="getTeamName">
+    <mat-option *ngFor="let team of filteredTeams | async" [value]="team"
+      (onSelectionChange)="selectTeam(team)">
+      <span>{{ team.name }}</span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

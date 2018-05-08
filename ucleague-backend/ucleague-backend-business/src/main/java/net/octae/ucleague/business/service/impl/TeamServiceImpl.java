@@ -5,10 +5,13 @@ import javax.transaction.Transactional;
 import net.octae.ucleague.business.service.TeamService;
 import net.octae.ucleague.business.service.util.EntityConverter;
 import net.octae.ucleague.domain.Team;
+import net.octae.ucleague.domain.TeamInput;
 import net.octae.ucleague.persistence.entity.ChampionshipEntity;
+import net.octae.ucleague.persistence.entity.CountryEntity;
 import net.octae.ucleague.persistence.entity.TeamEntity;
 import net.octae.ucleague.persistence.repository.ChampionshipRepository;
 import net.octae.ucleague.persistence.repository.TeamRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,19 +39,31 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public Page<Team> getTeams(Pageable pageable) {
-        return entityConverter.convert(teamRepository.findAll(pageable), Team.class);
+    public Page<Team> getTeams(String name, Pageable pageable) {
+
+        Page<TeamEntity> teams;
+        if (StringUtils.isBlank(name)) {
+            teams = teamRepository.findAll(pageable);
+        } else {
+            teams = teamRepository.findByNameIgnoreCaseContaining(name, pageable);
+        }
+        return entityConverter.convert(teams, Team.class);
     }
 
     @Override
-    public Page<Team> getTeamsByName(String name, Pageable pageable) {
-        return entityConverter.convert(teamRepository.findByNameIgnoreCaseContaining(name, pageable), Team.class);
-    }
-
-    @Override
-    public Team createOrUpdateTeam(Team team) {
-        TeamEntity teamCreated = teamRepository.save(entityConverter.convert(team, TeamEntity.class));
+    public Team createTeam(TeamInput teamInput) {
+        TeamEntity teamCreated = teamRepository.save(entityConverter.convert(teamInput, TeamEntity.class));
         return entityConverter.convert(teamCreated, Team.class);
+    }
+
+    @Override
+    public Team updateTeam(Long teamId, TeamInput teamInput) {
+        TeamEntity teamEntity = teamRepository.findById(teamId).get();
+        teamEntity.setName(teamInput.getName());
+        teamEntity.setCountry(teamInput.getCountryCode() != null ? new CountryEntity(teamInput.getCountryCode()) : null);
+        teamEntity.setRival(teamInput.getRivalId() != null ? new TeamEntity(teamInput.getRivalId()) : null);
+        TeamEntity teamUpdated = teamRepository.save(teamEntity);
+        return entityConverter.convert(teamUpdated, Team.class);
     }
 
     @Override
