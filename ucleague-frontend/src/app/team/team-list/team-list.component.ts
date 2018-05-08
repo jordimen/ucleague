@@ -19,7 +19,7 @@ import { TeamService } from '../team.service';
 })
 export class TeamListComponent implements OnInit {
 
-  displayedColumns = ['id', 'name', 'country', 'totalChampionLeague', 'actions'];
+  displayedColumns = ['id', 'name', 'country', 'totalChampionships', 'actions'];
   dataSource = new MatTableDataSource();
 
   // Pagination
