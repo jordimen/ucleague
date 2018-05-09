@@ -1,0 +1,4 @@
+<div *ngFor="let error of errorMessages" class="error-message">
+  {{error.message}}
+  <span class="closebtn" (click)="removeError(error)">&times;</span> 
+</div>

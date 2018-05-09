@@ -10,13 +10,14 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { ErrorService } from '../common/error.service';
 
 @Injectable()
 export class TeamService {
 
   private url = `${environment.apiUrl}/team`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private errorService: ErrorService) { }
 
   saveOrUpdateTeam(teamInput: TeamInput): Observable<Team> {
     if (teamInput.id) {
@@ -78,6 +79,7 @@ export class TeamService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
+      this.errorService.notify('Application error');
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

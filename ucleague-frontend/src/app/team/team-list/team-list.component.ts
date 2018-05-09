@@ -12,7 +12,6 @@ import { Team } from '../team';
 import { PaginationPage } from '../pagination';
 import { TeamService } from '../team.service';
 import { TeamChampionshipsDetailComponent } from '../view/team-championships-detail/team-championships-detail.component';
-import { emit } from 'cluster';
 
 @Component({
   selector: 'ucleague-teams',

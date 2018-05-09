@@ -1,4 +1,4 @@
-import { Country } from '../common-components/country-selector/country';
+import { Country } from '../common/country';
 
 export class Team {
     id: number;

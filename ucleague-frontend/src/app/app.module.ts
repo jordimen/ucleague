@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { MaterialModule } from './material/material.module';
 
-import { CommonComponentsModule } from './common-components/common-components.module';
+import { CommonComponentsModule } from './common/common-components.module';
 
 import { TeamModule } from './team/team.module';
 

@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { TeamService } from '../team.service';
 import { Team, TeamInput } from '../team';
-import { CountrySelectorComponent } from '../../common-components/country-selector/country-selector.component';
-import { Country } from '../../common-components/country-selector/country';
+import { CountrySelectorComponent } from '../../common/component/country-selector/country-selector.component';
+import { Country } from '../../common/country';
 
 @Component({
   selector: 'ucleague-team-form',

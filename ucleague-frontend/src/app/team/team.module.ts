@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../material/material.module';
 
-import { CommonComponentsModule } from '../common-components/common-components.module';
+import { CommonComponentsModule } from '../common/common-components.module';
 
 import { TeamListComponent } from './team-list/team-list.component';
 import { TeamService } from './team.service';

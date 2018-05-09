@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validator } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { startWith, map, debounceTime, distinctUntilChanged, switchMap, filter } from 'rxjs/operators';
 
-import { CountryService } from './country.service';
-import { Country } from './country';
+import { CountryService } from '../..//country.service';
+import { Country } from '../../country';
 
 @Component({
   selector: 'ucleague-country-selector',
