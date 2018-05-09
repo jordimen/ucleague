@@ -19,7 +19,7 @@ Main features:
 * Custom component for select countries and teams with autocomplete via backend.
 * Reactive forms.
 
-### Folder structure
+### Project structure
 
 ![alt text](./screenshots/frontend-folder-structure.png "Frontend folder structure")
 
@@ -45,11 +45,12 @@ http://localhost:4200/
 Main features:
 
 * Spring Boot microservice.
+* RESTful API.
 * Spring Data JPA.
 * Embedded H2 database.
 * Dozer for bean mapping.
 
-### Modules
+### Project structure
 
 ![alt text](./screenshots/backend-folder-structure.png "Backend folder structure")
 

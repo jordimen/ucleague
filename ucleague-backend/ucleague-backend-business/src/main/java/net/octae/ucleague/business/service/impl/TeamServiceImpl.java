@@ -116,8 +116,10 @@ public class TeamServiceImpl implements TeamService {
 
         // To add
         Collection<ChampionshipEntity> toAdd = CollectionUtils.subtract(newChampionships, toMantain);
+
         // Remove older championships
         toAdd.forEach(championshipEntity -> championshipRepository.removeChampionship(championshipEntity.getYear()));
+
         // Add to the winner
         winner.getChampionships().addAll(toAdd);
     }
