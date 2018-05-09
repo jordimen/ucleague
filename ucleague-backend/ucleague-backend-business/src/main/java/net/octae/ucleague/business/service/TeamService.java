@@ -1,9 +1,12 @@
 package net.octae.ucleague.business.service;
 
+import net.octae.ucleague.domain.Championship;
 import net.octae.ucleague.domain.Team;
 import net.octae.ucleague.domain.TeamInput;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * The interface Team service.
@@ -66,5 +69,13 @@ public interface TeamService {
      * @param year   the year
      */
     void deleteChampionship(Long teamId, Long year);
+
+    /**
+     * Update championships.
+     *
+     * @param teamId the team id
+     * @param championships the championships
+     */
+    void updateChampionships(Long teamId, List<Championship> championships);
 
 }

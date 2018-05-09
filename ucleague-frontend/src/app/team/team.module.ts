@@ -12,6 +12,8 @@ import { TeamListComponent } from './team-list/team-list.component';
 import { TeamService } from './team.service';
 import { TeamFormComponent } from './team-form/team-form.component';
 import { TeamSelectorComponent } from './component/team-selector/team-selector.component';
+import { TeamChampionshipsDetailComponent } from './view/team-championships-detail/team-championships-detail.component';
+import { TeamChampionshipsSelectorComponent } from './component/team-championships-selector/team-championships-selector.component';
 
 @NgModule({
   imports: [
@@ -25,7 +27,12 @@ import { TeamSelectorComponent } from './component/team-selector/team-selector.c
   declarations: [
     TeamListComponent,
     TeamFormComponent,
-    TeamSelectorComponent
+    TeamSelectorComponent,
+    TeamChampionshipsDetailComponent,
+    TeamChampionshipsSelectorComponent
+  ],
+  entryComponents: [
+    TeamChampionshipsDetailComponent
   ],
   providers: [
     TeamService

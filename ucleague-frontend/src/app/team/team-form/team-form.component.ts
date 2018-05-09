@@ -55,8 +55,8 @@ export class TeamFormComponent implements OnInit {
     const team: TeamInput = {
       id: this.team.id,
       name: formModel.name as string,
-      countryCode: this.team.country.code,
-      rivalId: this.team.rival.id
+      countryCode: this.team.country && this.team.country.code || null,
+      rivalId: this.team.rival && this.team.rival.id || null
     };
     return team;
   }

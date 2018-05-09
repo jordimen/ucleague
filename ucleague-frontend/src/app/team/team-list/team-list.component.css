@@ -1,0 +1,31 @@
+.championships {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin:0 auto;
+    cursor:pointer;
+}
+
+.championship-year {
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.87);
+    background-color: rgba(0, 0, 0, 0.87);
+    color: #ffffff;
+    border-width: thin;
+    font-size: 0.9em;
+    margin: 2px;
+    padding: 2px;
+    white-space: nowrap;
+}
+
+.championship-year-none {
+    border-style: solid;
+    border-color: rgba(150, 150, 150, 0.87);
+    background-color: rgba(150, 150, 150, 0.87);
+    color: #ffffff;
+    border-width: thin;
+    font-size: 0.9em;
+    margin: 2px;
+    padding: 2px;
+    white-space: nowrap;
+}

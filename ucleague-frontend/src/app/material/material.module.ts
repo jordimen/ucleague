@@ -6,8 +6,10 @@ import { CdkTableModule } from '@angular/cdk/table';
 import {
   MatAutocompleteModule,
   MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
   MatChipsModule,
+  MatDialogModule,
   MatDividerModule,
   MatIconModule,
   MatInputModule,
@@ -16,7 +18,8 @@ import {
   MatSelectModule,
   MatSortModule,
   MatTableModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 
 import {
@@ -30,8 +33,10 @@ import {
     BrowserAnimationsModule,
     MatAutocompleteModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatChipsModule,
+    MatDialogModule,
     MatDividerModule,
     MatInputModule,
     MatIconModule,
@@ -40,14 +45,17 @@ import {
     MatSelectModule,
     MatSortModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTooltipModule
   ],
   exports: [
     CdkTableModule,
     MatAutocompleteModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatChipsModule,
+    MatDialogModule,
     MatDividerModule,
     MatInputModule,
     MatIconModule,
@@ -56,7 +64,8 @@ import {
     MatSelectModule,
     MatSortModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTooltipModule
   ],
   declarations: []
 })

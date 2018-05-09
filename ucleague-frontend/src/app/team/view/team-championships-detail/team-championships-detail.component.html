@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>{{data.name}} championships</h1>
+<div mat-dialog-content style="margin-bottom: 10px;">
+  <ucleague-team-championships-selector [(championships)]="data.championships">
+  </ucleague-team-championships-selector>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-actions style="display: flex; justify-content: flex-end;">
+  <button mat-raised-button color="primary" [mat-dialog-close]="data.championships" cdkFocusInitial>Ok</button>
+</div>

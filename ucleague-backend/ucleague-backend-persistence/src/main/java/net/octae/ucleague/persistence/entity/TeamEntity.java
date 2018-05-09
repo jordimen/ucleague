@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.annotations.Formula;
 
@@ -38,7 +39,7 @@ public class TeamEntity {
     @JoinColumn(name = "RIVAL_ID")
     private TeamEntity rival;
 
-    @OneToMany(mappedBy = "winner", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "winner", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChampionshipEntity> championships;
 
     //TO IMPROVE: poor performance
@@ -193,5 +194,18 @@ public class TeamEntity {
      */
     public void setTotalChampionships(Integer totalChampionships) {
         this.totalChampionships = totalChampionships;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TeamEntity)) return false;
+        TeamEntity that = (TeamEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

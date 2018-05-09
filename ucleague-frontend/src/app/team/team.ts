@@ -6,6 +6,15 @@ export class Team {
     country: Country;
     rival: Team;
     logo: number;
+    championships: Championship[];
+}
+
+export class Championship {
+    year: number;
+
+    constructor(year: number) {
+        this.year = year;
+    }
 }
 
 export class TeamInput {

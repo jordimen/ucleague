@@ -27,11 +27,12 @@
 
       <!-- Total Champion League Column -->
       <ng-container matColumnDef="totalChampionships">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Champion League </mat-header-cell>
-        <mat-cell *matCellDef="let row"> 
-            <mat-chip-list>
-                <mat-chip *ngFor="let championship of row.championships">{{championship.year}}</mat-chip>
-            </mat-chip-list>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Championships </mat-header-cell>
+        <mat-cell *matCellDef="let row" (click)="openDialog(row)"> 
+            <div class="championships" matTooltip="Click to manage championships">
+                <span class="championship-year" *ngFor="let championship of row.championships">{{championship.year}}</span>
+                <span class="championship-year-none" *ngIf="row.championships.length === 0">None</span>
+            </div>
         </mat-cell>
       </ng-container>
 

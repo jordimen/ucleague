@@ -2,6 +2,7 @@ package net.octae.ucleague.ws.controller;
 
 import net.octae.ucleague.business.service.TeamService;
 import net.octae.ucleague.business.service.util.EntityConverter;
+import net.octae.ucleague.domain.Championship;
 import net.octae.ucleague.domain.Country;
 import net.octae.ucleague.domain.Team;
 import net.octae.ucleague.domain.TeamInput;
@@ -111,6 +112,17 @@ public class TeamController {
     @DeleteMapping(path = "/{teamId}/championship/{year}")
     public void deleteChampionship(@PathVariable Long teamId, @PathVariable Long year) {
         teamService.deleteChampionship(teamId, year);
+    }
+
+    /**
+     * Update championships.
+     *
+     * @param teamId the team id
+     * @param championships the championships
+     */
+    @PutMapping(path = "/{teamId}/championship")
+    public void updateChampionship(@PathVariable Long teamId, @RequestBody List<ChampionshipDTO> championships) {
+        teamService.updateChampionships(teamId, entityConverter.convert(championships, Championship.class));
     }
 
     /**

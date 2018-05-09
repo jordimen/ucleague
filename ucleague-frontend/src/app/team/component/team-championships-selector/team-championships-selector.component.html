@@ -1,0 +1,5 @@
+<mat-button-toggle class="championship-year" *ngFor="let year of years" value="year"
+    [checked]="isChampionshipYear(year)" 
+    (change)="updateChampionshipYear(year)">
+    {{year}}
+</mat-button-toggle>

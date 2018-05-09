@@ -1,9 +1,8 @@
 package net.octae.ucleague.business.service.impl;
 
-import javax.transaction.Transactional;
-
 import net.octae.ucleague.business.service.TeamService;
 import net.octae.ucleague.business.service.util.EntityConverter;
+import net.octae.ucleague.domain.Championship;
 import net.octae.ucleague.domain.Team;
 import net.octae.ucleague.domain.TeamInput;
 import net.octae.ucleague.persistence.entity.ChampionshipEntity;
@@ -11,11 +10,17 @@ import net.octae.ucleague.persistence.entity.CountryEntity;
 import net.octae.ucleague.persistence.entity.TeamEntity;
 import net.octae.ucleague.persistence.repository.ChampionshipRepository;
 import net.octae.ucleague.persistence.repository.TeamRepository;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The type Team service.
@@ -52,8 +57,10 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public Team createTeam(TeamInput teamInput) {
-        TeamEntity teamCreated = teamRepository.save(entityConverter.convert(teamInput, TeamEntity.class));
-        return entityConverter.convert(teamCreated, Team.class);
+        TeamEntity newTeam = new TeamEntity(teamInput.getName());
+        newTeam.setCountry(new CountryEntity(teamInput.getCountryCode()));
+        newTeam.setRival(teamRepository.findById(teamInput.getRivalId()).get());
+        return entityConverter.convert(teamRepository.save(newTeam), Team.class);
     }
 
     @Override
@@ -86,6 +93,33 @@ public class TeamServiceImpl implements TeamService {
     public void deleteChampionship(Long teamId, Long year) {
         // remove championship for a given team
         championshipRepository.removeTeamChampionship(teamId, year);
+    }
+
+    @Override
+    public void updateChampionships(Long teamId, List<Championship> championships) {
+
+        // Gets the winner for the championships
+        TeamEntity winner = teamRepository.findById(teamId).get();
+
+        // New championships
+        List<ChampionshipEntity> newChampionships = entityConverter.convert(championships, ChampionshipEntity.class);
+        newChampionships.forEach(newChampionship -> {
+            newChampionship.setWinner(winner);
+        });
+
+        // To delete
+        Collection<ChampionshipEntity> toDelete = CollectionUtils.subtract(winner.getChampionships(), newChampionships);
+        winner.getChampionships().removeAll(toDelete);
+
+        // To mantain
+        Collection<ChampionshipEntity> toMantain = CollectionUtils.intersection(winner.getChampionships(), newChampionships);
+
+        // To add
+        Collection<ChampionshipEntity> toAdd = CollectionUtils.subtract(newChampionships, toMantain);
+        // Remove older championships
+        toAdd.forEach(championshipEntity -> championshipRepository.removeChampionship(championshipEntity.getYear()));
+        // Add to the winner
+        winner.getChampionships().addAll(toAdd);
     }
 
 }

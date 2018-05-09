@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
-import { Team, TeamInput } from './team';
+import { Team, TeamInput, Championship } from './team';
 import { PaginationPage } from './pagination';
 
 import { Observable } from 'rxjs/Observable';
@@ -59,6 +59,13 @@ export class TeamService {
     const deleteUrl = `${this.url}/${team.id}`;
     return this.http.delete(deleteUrl, {}).pipe(
       catchError(this.handleError<Team>(`deleteTeam id=${team.id}`))
+    );
+  }
+
+  updateChampionships(team: Team): Observable<{}> {
+    const putChampionshipsUrl = `${this.url}/${team.id}/championship`;
+    return this.http.put(putChampionshipsUrl, team.championships).pipe(
+      catchError(this.handleError<Team>(`updateChampionships id=${team.id}`))
     );
   }
 

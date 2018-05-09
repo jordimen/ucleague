@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { MatTableDataSource, MatPaginator, MatSort, MatTable } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatTable, MatDialog } from '@angular/material';
 
 import { merge } from 'rxjs/observable/merge';
 import { Observable } from 'rxjs/Observable';
@@ -11,6 +11,8 @@ import { of } from 'rxjs/observable/of';
 import { Team } from '../team';
 import { PaginationPage } from '../pagination';
 import { TeamService } from '../team.service';
+import { TeamChampionshipsDetailComponent } from '../view/team-championships-detail/team-championships-detail.component';
+import { emit } from 'cluster';
 
 @Component({
   selector: 'ucleague-teams',
@@ -34,7 +36,8 @@ export class TeamListComponent implements OnInit {
   teams: Team[];
   teamsPage: PaginationPage<Team>;
 
-  constructor(private router: Router, private teamService: TeamService) {
+  constructor(private router: Router, private teamService: TeamService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -42,9 +45,23 @@ export class TeamListComponent implements OnInit {
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    merge(this.sort.sortChange, this.paginator.page)
+    merge(this.sort.sortChange, this.paginator.page).subscribe(() => this.refreshTable());
+
+    this.refreshTable();
+  }
+
+  getTeams(sort: string, order: string, page: number, size: number): Observable<PaginationPage<Team>> {
+    return this.teamService.getTeams(sort, order, page, size);
+  }
+
+  deleteTeam(team: Team): void {
+    this.teamService.deleteTeam(team).subscribe(() => this.refreshTable());
+  }
+
+  refreshTable() {
+
+    merge(startWith({}))
     .pipe(
-      startWith({}),
       switchMap((value: {}, index: number) => {
         return this.getTeams(this.sort.active,
           this.sort.direction,
@@ -59,13 +76,17 @@ export class TeamListComponent implements OnInit {
         return of([]);
       })
     ).subscribe(data => this.dataSource.data = data);
+
   }
 
-  getTeams(sort: string, order: string, page: number, size: number): Observable<PaginationPage<Team>> {
-    return this.teamService.getTeams(sort, order, page, size);
+  openDialog(team: Team): void {
+    const dialogRef = this.dialog.open(TeamChampionshipsDetailComponent, {
+      data: { name: team.name, championships: team.championships }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.teamService.updateChampionships(team).subscribe(() => this.refreshTable());
+    });
   }
 
-  deleteTeam(team: Team): void {
-    this.teamService.deleteTeam(team).subscribe();
-  }
 }
